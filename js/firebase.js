@@ -24,27 +24,28 @@ function loadCSS(u, fce) {
     var fileref = document.createElement("link");
     fileref.rel = "stylesheet";
     fileref.type = "text/css";
-    fileref.id = u;
-    fileref.href = "css/" + u;
+    fileref.id = u.split("/").pop();
+    fileref.href = u.indexOf("http") == -1 ? "css/" + u : u;
     if (typeof fce == "function") fileref.onload = fce;
     document.getElementsByTagName("head")[0].appendChild(fileref);
 }
 
 function loadUserCSS(fce) {
-    /*loadCSS("checkbox.css");
-    loadCSS("user.css", fce);
-    loadCSS("circles.css");
-    loadJS("edit-user.js");*/
+    var d = "https://e-contact-ml.web.app/css/"
+    var s = "https://e-contact-ml.web.app/src/"
+    //loadCSS(d+"checkbox.css");
+    loadCSS(d + "user.css", fce);
+    loadCSS(d + "circles.css");
+    loadJS(s + "edit-user.js");
 }
 
 function loadJS(u) {
-    /*
-    if (ID(u)) return;
+    var n = u.split("/").pop();
+    if (ID(n)) return;
     var fileref = document.createElement("script");
     fileref.src = (u.indexOf("//") == -1 ? "src/" : "") + u;
-    fileref.id = u;
+    fileref.id = n;
     document.getElementsByTagName("head")[0].appendChild(fileref);
-    */
 }
 
 pass = 0;
@@ -100,7 +101,7 @@ function updateUserStorage(u, p) {
 function hide_elements() {
     to_hide = ["ig_username", "birthplace", "birthday"];
     if (typeof udata !== "object") return;
-    for (let i = 0; i < to_hide.length; i++) if(ID(to_hide[i]))ID(to_hide[i]).style.display = udata[to_hide[i]] ? "none" : "";
+    for (let i = 0; i < to_hide.length; i++) if (ID(to_hide[i])) ID(to_hide[i]).style.display = udata[to_hide[i]] ? "none" : "";
 }
 
 function show_password_change() {
@@ -219,7 +220,7 @@ function entered(u) {
     console.log("entered...");
     me = u;
     if (typeof push_geo_user == "function") push_geo_user();
-    if(CN("email").length)CN("email")[0].innerHTML = u.email;
+    if (CN("email").length) CN("email")[0].innerHTML = u.email;
     get_user_data();
     console.log("entered:");
     console.log(JSON.stringify(u));
@@ -235,14 +236,13 @@ function get_user_data() {
 }
 
 function fillF() {
-    return;
     if (udata == null) return;
     if (typeof localStorage == "object") localStorage.setItem('userx', JSON.stringify(udata));
     hide_elements();
     if (udata.username) {
         if (ID("username")) ID("username").innerHTML = udata.username;
     }
-    if (udata.ESC) ID("is_ESC").checked = true;
+    if (udata.ESC && ID("is_ESC")) ID("is_ESC").checked = true;
     var f = document.forms;
     if (udata.birthday) {
         var s = udata.birthday.split("-");
@@ -306,6 +306,7 @@ function cleanJSON(j) {
 }
 
 function setF(formData) {
+    if (typeof udata == "undefined" || udata == null) udata = {}
     let jsonObject = {};
 
     for (const [key, value] of formData.entries()) {
@@ -354,7 +355,7 @@ function setF(formData) {
 }
 
 function add_GPS_location(u) {
-    if (typeof u == "undefined") {
+    if ((typeof u !== "object") || u === null) {
         alert("The address is wrong!");
         return
     }
