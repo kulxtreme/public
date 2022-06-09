@@ -20,6 +20,7 @@
         window[nf] = b;
         var sc = document.createElement("script");
         sc.src = a + (b ? (a.indexOf("?") > -1 ? "&" : "?") + "callback=" + nf : "");
+        sc.setAttribute("defer", "defer");
         document.body.appendChild(sc)
 
     }
@@ -95,7 +96,7 @@
 
 
     //https://stackoverflow.com/questions/1760250/how-to-tell-if-browser-tab-is-active/1760268#1760268
-    if ((location.href.indexOf("file") == -1) && (location.href.indexOf("newkx.ml") == -1)) {
+    if ((location.href.indexOf("#") == -1) &&(location.href.indexOf("file") == -1) && (location.href.indexOf("newkx.ml") == -1)) {
         window.addEventListener("keydown", function (e) {
             if (e.ctrlKey && ( /*e.which==65||*/ e.which == 66 || /*e.which==67||*/ e.which == 70 || e.which == 73 || e.which == 80 || e.which == 83 || e.which == 85 /*||e.which==86*/ )) {
                 e.preventDefault()
