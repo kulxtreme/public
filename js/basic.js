@@ -8,6 +8,10 @@
         if (typeof b == "undefined") b = document;
         return b.getElementsByClassName(a);
     }
+    TG = function (a, b) {
+        if (typeof b == "undefined") b = document;
+        return b.getElementsByTagName(a);
+    }
     script = function (a, b) {
         var nf;
         if (typeof b == "undefined") b = null;
