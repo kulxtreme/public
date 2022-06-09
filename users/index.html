@@ -14,8 +14,21 @@
         href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAXFxcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAREQAAAAAAAREREAAAAAARERERAAAAABEREREAAAAAEREREQAAAAARERERAAAAAAERERAAAAAAABERAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA//8AAP//AAD//wAA/D8AAPgfAADwDwAA8A8AAPAPAADwDwAA+B8AAPw/AAD//wAA//8AAP//AAD//wAA"
         rel="icon" type="image/x-icon" />
     <title>User Interface | kulXtreme</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    https://meyerweb.com/eric/tools/css/reset/ -->
+    <script>
+        // localStorage in private window, otherwise indexedDB
+        function get_auth_user(){
+            var auth_user = null;
+            for (var key in localStorage){
+                if(key.indexOf("firebase:authUser")>-1){
+                    auth_user = localStorage.getItem(key);
+                    break;
+                }
+            }
+            return auth_user;
+        }
+    </script>
     <style>
         * {
             -moz-box-sizing: border-box;
@@ -583,7 +596,7 @@
     </div>
     <div class="c">
         <form onsubmit="setF(this);return false;" id="profile-form">
-            <script src="../js/upload-vue.js"></script>
+            <script src="../js/upload-vue.js" defer></script>
             <script>
                 fdd = null;
                 function uploadImageSuccess(formData, index, fileList) {
@@ -605,7 +618,6 @@
                         db.ref("/photos/").push(returned);
                     } else alert("Photo has not been saved!");
                 }
-                function dataChange() { alert(1) }
                 imageList = [
                     "https://images.unsplash.com/photo-1506184155123-73f3a6dfc2fc?auto=format&fit=crop&w=764&q=80",
                     "https://images.unsplash.com/photo-1506799688517-a81d6bd3df37?auto=format&fit=crop&w=880&q=80"
@@ -805,7 +817,7 @@
     <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script defer src="../js/basic.js"></script>
-    <script src="../js/autosize.min.js" onload="correct_autosize()"></script>
+    <script src="../js/autosize.min.js" onload="correct_autosize()" defer></script>
     <script defer src="../js/firebase.js"></script>
 
 </body>
