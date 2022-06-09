@@ -596,7 +596,7 @@
     </div>
     <div class="c">
         <form onsubmit="setF(this);return false;" id="profile-form">
-            <script src="../js/upload-vue.js" defer></script>
+            <script src="../js/upload-vue.js"></script>
             <script>
                 fdd = null;
                 function uploadImageSuccess(formData, index, fileList) {
@@ -618,6 +618,7 @@
                         db.ref("/photos/").push(returned);
                     } else alert("Photo has not been saved!");
                 }
+                function dataChange() { alert(1) }
                 imageList = [
                     "https://images.unsplash.com/photo-1506184155123-73f3a6dfc2fc?auto=format&fit=crop&w=764&q=80",
                     "https://images.unsplash.com/photo-1506799688517-a81d6bd3df37?auto=format&fit=crop&w=880&q=80"
@@ -817,7 +818,7 @@
     <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script defer src="../js/basic.js"></script>
-    <script src="../js/autosize.min.js" onload="correct_autosize()" defer></script>
+    <script src="../js/autosize.min.js" onload="correct_autosize()"></script>
     <script defer src="../js/firebase.js"></script>
 
 </body>
