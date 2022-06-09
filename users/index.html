@@ -596,7 +596,7 @@
     </div>
     <div class="c">
         <form onsubmit="setF(this);return false;" id="profile-form">
-            <script src="../js/upload-vue.js"></script>
+            <script src="../js/upload-vue.js" defer></script>
             <script>
                 fdd = null;
                 function uploadImageSuccess(formData, index, fileList) {
@@ -818,7 +818,7 @@
     <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script defer src="../js/basic.js"></script>
-    <script src="../js/autosize.min.js" onload="correct_autosize()"></script>
+    <script defer src="../js/autosize.min.js" onload="correct_autosize()"></script>
     <script defer src="../js/firebase.js"></script>
 
 </body>
